@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.db
+
+# Node
+node_modules/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local config (contains machine-specific paths)
+.claude/
+
+# Data
+backend/data/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

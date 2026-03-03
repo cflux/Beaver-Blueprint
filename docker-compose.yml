@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - db-data:/app/data
+    environment:
+      - BB_CORS_ORIGINS=["http://localhost"]
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: ../backend/Dockerfile
+    command: ["python", "server.py"]
+    volumes:
+      - db-data:/app/data
+    profiles:
+      - mcp
+
+volumes:
+  db-data:
