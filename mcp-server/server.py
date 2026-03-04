@@ -10,7 +10,8 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from slugify import slugify
 
 # Database setup — same SQLite as the web backend
-DB_PATH = Path(__file__).resolve().parent.parent / "backend" / "data" / "beaver.db"
+import os
+DB_PATH = Path(os.environ.get("BB_DB_PATH", str(Path(__file__).resolve().parent.parent / "backend" / "data" / "beaver.db")))
 DB_PATH.parent.mkdir(exist_ok=True)
 
 engine = create_engine(f"sqlite:///{DB_PATH}", echo=False)
@@ -271,8 +272,8 @@ def update_project(slug: str, name: str = None, description: str = None, categor
 
 @mcp.tool()
 def update_project_status(slug: str, status: str) -> str:
-    """Update a project's status. Valid statuses: concept, active, in_progress, complete."""
-    valid = {"concept", "active", "in_progress", "complete"}
+    """Update a project's status. Valid statuses: concept, active, in_progress, complete, retired."""
+    valid = {"concept", "active", "in_progress", "complete", "retired"}
     if status not in valid:
         return f"Error: Invalid status '{status}'. Must be one of: {', '.join(sorted(valid))}"
     with get_db() as db:
@@ -744,4 +745,7 @@ def update_milestone(slug: str, milestone_id: int, title: str = None, descriptio
 
 
 if __name__ == "__main__":
-    mcp.run()
+    import os
+    host = os.environ.get("MCP_HOST", "0.0.0.0")
+    port = int(os.environ.get("MCP_PORT", "8001"))
+    mcp.run(transport="sse", host=host, port=port)

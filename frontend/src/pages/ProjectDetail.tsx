@@ -14,13 +14,14 @@ function timeAgo(dateStr: string) {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-const PROJECT_STATUSES = ['concept', 'active', 'in_progress', 'complete'] as const;
+const PROJECT_STATUSES = ['concept', 'active', 'in_progress', 'complete', 'retired'] as const;
 
 const statusColors: Record<string, string> = {
   concept: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
   active: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
   in_progress: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
   complete: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+  retired: 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400',
 };
 
 export function ProjectDetail() {

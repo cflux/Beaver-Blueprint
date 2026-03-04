@@ -17,6 +17,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     if (!projectList) return {};
     const groups: Record<string, typeof projectList.projects> = {};
     for (const p of projectList.projects) {
+      if (p.status === 'retired') continue;
       const cat = p.category || 'Uncategorized';
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(p);
@@ -56,6 +57,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <span>▦</span>
             Dashboard
+          </Link>
+
+          {/* Retired projects link */}
+          <Link
+            to="/retired"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors mt-2 ${
+              location.pathname === '/retired'
+                ? 'bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                : 'text-gray-400 hover:bg-gray-100 dark:text-gray-500 dark:hover:bg-gray-700'
+            }`}
+          >
+            <span>⊘</span>
+            Retired Projects
           </Link>
 
           {/* Project categories */}

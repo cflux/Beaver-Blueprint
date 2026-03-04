@@ -3,7 +3,7 @@ export interface Project {
   name: string;
   slug: string;
   description: string | null;
-  status: 'concept' | 'active' | 'in_progress' | 'complete';
+  status: 'concept' | 'active' | 'in_progress' | 'complete' | 'retired';
   category: string;
   goal: string;
   created_at: string;

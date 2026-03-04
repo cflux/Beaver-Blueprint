@@ -9,6 +9,7 @@ import { DocsView } from './pages/DocsView';
 import { DocEditor } from './pages/DocEditor';
 import { ProgressView } from './pages/ProgressView';
 import { DiscoveryView } from './pages/DiscoveryView';
+import { RetiredProjects } from './pages/RetiredProjects';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/retired" element={<RetiredProjects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/projects/:slug/discovery" element={<DiscoveryView />} />
           <Route path="/projects/:slug/plan" element={<PlanEditor />} />

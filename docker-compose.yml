@@ -16,14 +16,13 @@ services:
       - backend
 
   mcp-server:
-    build:
-      context: ./mcp-server
-      dockerfile: ../backend/Dockerfile
-    command: ["python", "server.py"]
+    build: ./mcp-server
+    ports:
+      - "8001:8001"
     volumes:
       - db-data:/app/data
-    profiles:
-      - mcp
+    depends_on:
+      - backend
 
 volumes:
   db-data:
