@@ -2,23 +2,23 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT:-8000}:8000"
     volumes:
       - db-data:/app/data
     environment:
-      - BB_CORS_ORIGINS=["http://localhost"]
+      - BB_CORS_ORIGINS=${BB_CORS_ORIGINS:-["http://localhost"]}
 
   frontend:
     build: ./frontend
     ports:
-      - "80:80"
+      - "${FRONTEND_PORT:-80}:80"
     depends_on:
       - backend
 
   mcp-server:
     build: ./mcp-server
     ports:
-      - "8001:8001"
+      - "${MCP_PORT:-8001}:8001"
     volumes:
       - db-data:/app/data
     depends_on:

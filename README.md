@@ -65,11 +65,26 @@ All three services start together:
 docker compose up --build
 ```
 
-| Service | URL |
+| Service | Default URL |
 |---|---|
 | Frontend | http://localhost |
 | Backend API | http://localhost:8000 |
 | MCP Server (SSE) | http://localhost:8001/sse |
+
+Ports are configurable via a `.env` file (copy from `.env.example`):
+
+```bash
+cp .env.example .env
+# edit .env, then:
+docker compose up -d
+```
+
+```ini
+FRONTEND_PORT=80
+BACKEND_PORT=8000
+MCP_PORT=8001
+BB_CORS_ORIGINS=["http://localhost"]
+```
 
 To connect Claude Code on another machine, edit `.claude/settings.json`:
 
