@@ -8,7 +8,7 @@ export function useApi<T>(fetcher: () => Promise<T>, deps: unknown[] = []) {
   const refresh = useCallback(() => {
     setLoading(true);
     setError(null);
-    fetcher()
+    return fetcher()
       .then(setData)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
