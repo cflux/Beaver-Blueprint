@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectsApi } from '../api/projects';
+import type { Project } from '../types';
 import { useApi } from '../hooks/useApi';
 import { useSidebar } from '../context/SidebarContext';
 
@@ -32,7 +33,7 @@ export function ProjectDetail() {
   const [statusOpen, setStatusOpen] = useState(false);
   const { refreshSidebar } = useSidebar();
 
-  const handleStatusChange = async (newStatus: string) => {
+  const handleStatusChange = async (newStatus: Project['status']) => {
     setStatusOpen(false);
     await projectsApi.update(slug!, { status: newStatus });
     await refresh();

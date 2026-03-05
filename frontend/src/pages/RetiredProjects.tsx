@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projectsApi } from '../api/projects';
+import type { Project } from '../types';
 import { useApi } from '../hooks/useApi';
 import { useSidebar } from '../context/SidebarContext';
 
@@ -18,7 +19,7 @@ export function RetiredProjects() {
   const { refreshSidebar } = useSidebar();
   const [updating, setUpdating] = useState<number | null>(null);
 
-  const handleRestore = async (slug: string, id: number, status: string) => {
+  const handleRestore = async (slug: string, id: number, status: Project['status']) => {
     setUpdating(id);
     try {
       await projectsApi.update(slug, { status });
