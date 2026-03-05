@@ -103,9 +103,8 @@ export function DiscoveryView() {
   const [tagSaving, setTagSaving] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    if (project) {
+    if (project && !goalDirty) {
       setGoal(project.goal);
-      setGoalDirty(false);
       setGoalPreview(!!project.goal.trim());
     }
   }, [project]);
@@ -146,6 +145,7 @@ export function DiscoveryView() {
       await projectsApi.update(slug!, { goal });
       await refreshProject();
       setGoalDirty(false);
+      setGoalPreview(!!goal.trim());
       dismiss();
     } finally {
       setGoalSaving(false);
